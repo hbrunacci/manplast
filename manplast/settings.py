@@ -111,40 +111,56 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'es-ar'
+LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'America/Argentina/Buenos_Aires'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_SSL_REDIRECT = True
+#SESSION_COOKIE_SECURE = True
+#CSRF_COOKIE_SECURE = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+# django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
-IMAGE_CROPPING_JQUERY_URL = None
-
 INTERNAL_IPS = ('127.0.0.1',)
-
 
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
+IMAGE_CROPPING_JQUERY_URL = None
 
+LOGIN_REDIRECT_URL = 'accounts/login/'
+LOGOUT_REDIRECT_URL = '/'
 
-TIME_FORMAT= 'h:i A'
-DATETIME_FORMAT='d/m/Y H:i:s'
-DATE_FORMAT="d/m/Y"
+TIME_FORMAT = 'h:i A'
+DATETIME_FORMAT = 'dd/mm/yyyy H:i:s'
+DATE_FORMAT = "dd/mm/yyyy"
 
 TIME_INPUT_FORMATS = ['%I:%M %p']
+
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "manplast/static"),
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale/'),)
+LANGUAGES = [
+    ('es', ('Spanish')),
+    ('en', ('English')),
+]
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240 # higher than the count of fields

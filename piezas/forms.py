@@ -16,11 +16,13 @@ class PiezaForm(forms.ModelForm):
 
     class Meta:
         model = Pieza
-        fields = '__all__'
+        fields = ['nombre', 'cliente', 'marco', 'material', 'espesor', 'precalentado',
+                  'moldeo', 'enfriado', 'calefaccion', 'empujador', 'troquel',
+                  'altura_tupir','observaciones']
         widgets = {
             'calefaccion': ImageCropWidget,
             'empujador': ImageCropWidget,
-            'observaciones': CKEditorWidget(attrs={'lang': 'es'}),
+
         }
 
     def __init__(self, *args, **kwargs):
@@ -50,7 +52,7 @@ class PiezaForm(forms.ModelForm):
             Field('empujador',wrapper_class='col-md-4'),
                 ),
                 Tab(
-                    _('Terminaciones'),
+                    _('Corte'),
             Field('troquel',wrapper_class='col-md-6'),
             Field('altura_tupir',wrapper_class='col-md-6'),
                 ),
