@@ -45,11 +45,39 @@ class PiezaForm(forms.ModelForm):
                 ),
                 Tab(
                     _('Calefaccion'),
-            Field('calefaccion',wrapper_class='col-md-4'),
+                    HTML('''<div class='container-flex'>
+                                                                    <div class='row'>
+                                                                        '''),
+                    Field('calefaccion', wrapper_class='col-md-6'),
+                    HTML('''
+                                                                <div class=col-sm-6>
+                                                                    <div class='foto_calefaccion'>
+                                                                        <img id='img_calefaccion' style='width: 100px;' src="/media/{{form.calefaccion.upload_to}}{{form.calefaccion.value }}">
+                                                                        </img>
+                                                                       </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                '''
+                         ),
                 ),
                 Tab(
                     _('Empujador'),
-            Field('empujador',wrapper_class='col-md-4'),
+                    HTML('''<div class='container-flex'>
+                                                <div class='row'>
+                                                    '''),
+                    Field('empujador', wrapper_class='col-md-6'),
+                    HTML('''
+                                            <div class=col-md-6>
+                                                <div class='foto_empujador'>
+                                                    <img id='img_empujador' style='width: 100px;' src="/media/{{form.empujador.upload_to}}{{form.empujador.value }}">
+                                                    </img>
+                                                   </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            '''
+                     ),
                 ),
                 Tab(
                     _('Corte'),
