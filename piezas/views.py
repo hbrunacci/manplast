@@ -1,7 +1,20 @@
 from django.shortcuts import render
 from cruds_adminlte.crud import CRUDView
-from .models import Pieza
-from .forms import PiezaForm
+from cruds_adminlte.inline_crud import InlineAjaxCRUD
+from .models import Pieza, Cortes
+from .forms import PiezaForm, CortesForm
+from django.utils.translation import ugettext_lazy as _
+
+class CortesAjaxCRUD(InlineAjaxCRUD):
+    model = Cortes
+    base_model = Pieza
+    add_form = CortesForm
+    update_form = CortesForm
+    inline_field = 'pieza'
+    list_fields = ['id']
+    views_available = ['create','update', 'list']
+    paginate_by = 52
+    title = _("Cortes")
 
 
 class PiezaCRUD(CRUDView):
@@ -18,6 +31,7 @@ class PiezaCRUD(CRUDView):
     paginate_by = 1
     paginate_position = 'Bottom'  # Both | Bottom
     paginate_template = 'cruds/pagination/enumeration.html'
+    inlines = [CortesAjaxCRUD]
 
 
 # Create your views here.
