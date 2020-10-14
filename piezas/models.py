@@ -34,7 +34,9 @@ class Cortes(Base_Model):
     TIPOS_CORTES = [('tupir', 'Tupir'),
                     ('sierra', 'Sierra'),
                     ('Agujereadora', 'Agujereadora'),
-                    ('en_altura', 'Corte en altura'), ]
+                    ('router', 'Router'),
+                    ('troquel', 'Troquel'),
+                    ]
 
     pieza = models.ForeignKey(Pieza, on_delete=models.CASCADE, null=True, blank=True, related_name='cortes')
     tipo_corte = models.CharField(max_length=50, null=False, blank=False, choices=TIPOS_CORTES)

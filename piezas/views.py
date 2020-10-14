@@ -11,8 +11,8 @@ class CortesAjaxCRUD(InlineAjaxCRUD):
     add_form = CortesForm
     update_form = CortesForm
     inline_field = 'pieza'
-    list_fields = ['id']
-    views_available = ['create','update', 'list']
+    list_fields = ['tipo_corte', 'detalle']
+    views_available = ['create', 'update', 'list']
     paginate_by = 52
     title = _("Cortes")
 
