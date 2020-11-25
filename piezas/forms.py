@@ -10,7 +10,7 @@ from cruds_adminlte import (DatePickerWidget,
                             DateTimePickerWidget,
                             ColorPickerWidget,
                             CKEditorWidget)
-from .models import Pieza, Cortes
+from .models import Pieza, Cortes,Rebabado,Pegamento,Embalado
 
 class CortesForm(forms.ModelForm):
 
@@ -130,5 +130,69 @@ class PiezaForm(forms.ModelForm):
             )
         )
 
+class EmbaladoForm(forms.ModelForm):
 
+    class Meta:
+        model = Embalado
+        fields = ['pieza','tipo_embalaje','detalle','piezas_bulto','imagen_ref']
 
+    def __init__(self, *args, **kwargs):
+        super(EmbaladoForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_tag = False
+
+        self.helper.layout = Layout(
+            Field('pieza', wrapper_class='col-md-12'),
+            Field('tipo_embalaje', wrapper_class='col-md-12'),
+            Field('detalle', wrapper_class='col-md-12'),
+            Field('piezas_bulto', wrapper_class='col-md-12'),
+            HTML('''<div class='container-flex'><div class='row'>'''),
+            Field('imagen_ref', wrapper_class='col-md-6'),
+            HTML('''<div class=col-md-6><div class='foto_pieza'>
+                    <img id='img_pieza' style='width: 100px;' src="/media/{{form.imagen_ref.upload_to}}{{form.imagen_ref.value }}" alt=''>
+                    </img></div></div></div></div>'''),
+        )
+
+class PegamentoForm(forms.ModelForm):
+
+    class Meta:
+        model = Pegamento
+        fields = ['pieza','tipo_pegamento','detalle','imagen_ref']
+
+    def __init__(self, *args, **kwargs):
+        super(PegamentoForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_tag = False
+
+        self.helper.layout = Layout(
+            Field('pieza', wrapper_class='col-md-12'),
+            Field('tipo_embalaje', wrapper_class='col-md-12'),
+            Field('detalle', wrapper_class='col-md-12'),
+            HTML('''<div class='container-flex'><div class='row'>'''),
+            Field('imagen_ref', wrapper_class='col-md-6'),
+            HTML('''<div class=col-md-6><div class='foto_pieza'>
+                    <img id='img_pieza' style='width: 100px;' src="/media/{{form.imagen_ref.upload_to}}{{form.imagen_ref.value }}" alt=''>
+                    </img></div></div></div></div>'''),
+        )
+
+class RebabadoForm(forms.ModelForm):
+
+    class Meta:
+        model = Rebabado
+        fields = ['pieza','herramienta','detalle','imagen_ref']
+
+    def __init__(self, *args, **kwargs):
+        super(RebabadoForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_tag = False
+
+        self.helper.layout = Layout(
+            Field('pieza', wrapper_class='col-md-12'),
+            Field('herramienta', wrapper_class='col-md-12'),
+            Field('detalle', wrapper_class='col-md-12'),
+            HTML('''<div class='container-flex'><div class='row'>'''),
+            Field('imagen_ref', wrapper_class='col-md-6'),
+            HTML('''<div class=col-md-6><div class='foto_pieza'>
+                    <img id='img_pieza' style='width: 100px;' src="/media/{{form.imagen_ref.upload_to}}{{form.imagen_ref.value }}" alt=''>
+                    </img></div></div></div></div>'''),
+        )
