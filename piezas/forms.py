@@ -47,6 +47,13 @@ class CortesForm(forms.ModelForm):
             Field('tiempo', wrapper_class='col-md-4'),
         )
 
+        self.helper.layout.append(
+            FormActions(
+                Submit('submit', _('Submit'), css_class='btn btn-primary'),
+                HTML("""{% load i18n %}<a class="btn btn-danger"
+                        href="{{ url_delete }}">{% trans 'Delete' %}</a>"""),
+            )
+        )
 
 class PiezaForm(forms.ModelForm):
 
@@ -153,11 +160,18 @@ class EmbaladoForm(forms.ModelForm):
                     </img></div></div></div></div>'''),
         )
 
+        self.helper.layout.append(
+            FormActions(
+                Submit('submit', _('Submit'), css_class='btn btn-primary'),
+                HTML("""{% load i18n %}<a class="btn btn-danger"
+                        href="{{ url_delete }}">{% trans 'Delete' %}</a>"""),
+            )
+        )
 class PegamentoForm(forms.ModelForm):
 
     class Meta:
         model = Pegamento
-        fields = ['pieza','tipo_pegamento','detalle','imagen_ref']
+        fields = ['pieza', 'tipo_pegamento', 'detalle', 'imagen_ref']
 
     def __init__(self, *args, **kwargs):
         super(PegamentoForm, self).__init__(*args, **kwargs)
@@ -166,13 +180,20 @@ class PegamentoForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Field('pieza', wrapper_class='col-md-12'),
-            Field('tipo_embalaje', wrapper_class='col-md-12'),
+            Field('tipo_pegamento', wrapper_class='col-md-12'),
             Field('detalle', wrapper_class='col-md-12'),
             HTML('''<div class='container-flex'><div class='row'>'''),
             Field('imagen_ref', wrapper_class='col-md-6'),
             HTML('''<div class=col-md-6><div class='foto_pieza'>
                     <img id='img_pieza' style='width: 100px;' src="/media/{{form.imagen_ref.upload_to}}{{form.imagen_ref.value }}" alt=''>
                     </img></div></div></div></div>'''),
+        )
+        self.helper.layout.append(
+            FormActions(
+                Submit('submit', _('Submit'), css_class='btn btn-primary'),
+                HTML("""{% load i18n %}<a class="btn btn-danger"
+                        href="{{ url_delete }}">{% trans 'Delete' %}</a>"""),
+            )
         )
 
 class RebabadoForm(forms.ModelForm):
@@ -195,4 +216,12 @@ class RebabadoForm(forms.ModelForm):
             HTML('''<div class=col-md-6><div class='foto_pieza'>
                     <img id='img_pieza' style='width: 100px;' src="/media/{{form.imagen_ref.upload_to}}{{form.imagen_ref.value }}" alt=''>
                     </img></div></div></div></div>'''),
+        )
+
+        self.helper.layout.append(
+            FormActions(
+                Submit('submit', _('Submit'), css_class='btn btn-primary'),
+                HTML("""{% load i18n %}<a class="btn btn-danger"
+                        href="{{ url_delete }}">{% trans 'Delete' %}</a>"""),
+            )
         )
