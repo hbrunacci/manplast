@@ -26,7 +26,7 @@ django-select2==7.4.2
 django-weasyprint==1.0.1
 django-widget-tweaks==1.4.8
 djangoajax==3.2
-djangorestframework==3.11.1
+djangorestframework==3.11.2
 easy-thumbnails==2.7
 html5lib==1.1
 httpie==2.2.0
