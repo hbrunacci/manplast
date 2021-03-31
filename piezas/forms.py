@@ -20,7 +20,7 @@ class CortesForm(forms.ModelForm):
 
         labels = {
             'detalle': _('Instrucciones'),
-            'altura': _('Altura (Segundos)'),
+            'altura': _('Altura (Milimetros)'),
             'tiempo': _('Tiempo (Segundos)'),
         }
         help_texts = {
