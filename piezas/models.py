@@ -33,7 +33,7 @@ class Cortes(Base_Model):
                     ('router', 'Router'),
                     ('troquel', 'Troquel'),
                     ('tijera', 'Tijera'),
-                    ('cutter','Cutter')
+                    ('cutter', 'Cutter')
                     ]
 
     pieza = models.ForeignKey(Pieza, on_delete=models.CASCADE, null=True, blank=True, related_name='cortes')
@@ -52,10 +52,10 @@ class Cortes(Base_Model):
 
 
 class Rebabado(Base_Model):
-    HERRAMIENTA = [('Cuter','Cuter'),
-                   ('Rebabador','Rebabador'),
-                   ('lijado','lijado'),
-                   ('Tijera','Tijera'),
+    HERRAMIENTA = [('Cuter', 'Cuter'),
+                   ('Rebabador', 'Rebabador'),
+                   ('lijado', 'lijado'),
+                   ('Tijera', 'Tijera'),
                    ]
 
     #MEC, Tolueno, Silicona, Cemento de contacto, Ciano, Ultra sonido

@@ -5,15 +5,7 @@
     {{ form.media }}
 {% endif %}
 
-<form
-    id="{{name}}_{{object.pk}}_addedit"
-    action="{% crud_inline_url base_model inline_model action namespace %}"
-    method="POST" enctype="multipart/form-data"
-    data-replace-inner="#{{name}}_editList"
-    data-ajax-submit=""
-    data-refresh-inner="#{{name}}_myList"
-    data-success="success"
-    onsubmit="return false;">
+<form id="{{name}}_{{object.pk}}_addedit">
     {% csrf_token %}
     <div class="box-body row">
         <div class="col-md-12">
@@ -55,4 +47,26 @@
 
     $('.modal #submit-id-submit').parent().parent().remove(); // FIXME: Remove the crispy buttons
     $('#edit_modal').modal('show');
+
+    $("#{{ name }}_{{ object.pk }}_addedit").submit(function (e) {
+        e.preventDefault();
+
+        var formdata = new FormData(this);
+
+        $.ajax({
+            url: "{% crud_inline_url base_model inline_model action namespace %}",
+            type: "POST",
+            data: formdata,
+            mimeTypes: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                ajaxGet($('#{{name}}_myList').data('refresh-url'), function(content) {
+                    $('#{{name}}_myList').html(content)
+                });
+                $('#edit_modal').modal('hide');
+            }
+        });
+    });
 </script>

@@ -56,15 +56,15 @@ class PiezaCRUD(CRUDView):
     check_perms = False
     add_form = PiezaForm
     update_form = PiezaForm
-    list_fields = ['nombre', 'cliente','material']
-    list_filter = ['nombre', 'cliente','material']
+    list_fields = ['nombre', 'cliente', 'material']
+    list_filter = ['nombre', 'cliente', 'material']
     views_available = ['create', 'list', 'update', 'detail', 'delete']
     search_fields = ['nombre__icontains']
     split_space_search = True
-    paginate_by = 1
+    paginate_by = 15
     paginate_position = 'Bottom'  # Both | Bottom
     paginate_template = 'cruds/pagination/enumeration.html'
-    inlines = [CortesAjaxCRUD,RebabadoAjaxCRUD,PegamentoAjaxCRUD,EmbaladoAjaxCRUD]
+    inlines = [CortesAjaxCRUD, RebabadoAjaxCRUD, PegamentoAjaxCRUD, EmbaladoAjaxCRUD]
 
 
 # Create your views here.

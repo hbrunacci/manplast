@@ -10,7 +10,7 @@ from cruds_adminlte import (DatePickerWidget,
                             DateTimePickerWidget,
                             ColorPickerWidget,
                             CKEditorWidget)
-from .models import Pieza, Cortes,Rebabado,Pegamento,Embalado
+from .models import Pieza, Cortes, Rebabado, Pegamento, Embalado
 
 class CortesForm(forms.ModelForm):
 
@@ -43,6 +43,7 @@ class CortesForm(forms.ModelForm):
             HTML('''<div class=col-md-6><div class='foto_pieza'>
                     <img id='img_pieza' style='width: 100px;' src="/media/{{form.imagen_ref.upload_to}}{{form.imagen_ref.value }}" alt=''>
                     </img></div></div></div></div>'''),
+
             Field('altura', wrapper_class='col-md-4'),
             Field('tiempo', wrapper_class='col-md-4'),
         )
