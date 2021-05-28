@@ -1,0 +1,249 @@
+{% extends template_father %}
+{% load i18n %}
+{% load crud_tags %}
+
+{% block title %}{% if blocks.title %}{{ blocks.page_description }}{% else %}{% trans "Detail of" %} {{ model_verbose_name|lower }}{% endif %}{% endblock %}
+{% block body_class %}{{ blocks.body_class|default:model_verbose_name_plural|lower }}{% endblock body_class %}
+{% block page_name %}{{ blocks.page_name|default:model_verbose_name_plural }}{% endblock %}
+{% block page_description %}{% if blocks.page_description %}{{ blocks.page_description }}{% else %}{% trans "Detail of" %} {{ object }}{% endif %}{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12" style="max-width: 1400px;">
+        {% if url_list and 'list' in views_available and crud_perms.list %}
+            <a href="{{ url_list }}{{getparams}}">
+                <i class="fa fa-angle-double-left"></i>
+                {% trans "Back to" %} {{ model_verbose_name_plural|lower }}
+            </a>
+        {% endif %}
+        <br /><br />
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">{% trans "Detail of" %} {{ object }}</h3>
+            </div>
+
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div style="margin: 15px">
+                            <a href="#">
+                                <img  src="{{ object.imagen_pieza.url }}"  class="rounded float-left" alt="..." style="max-width: 300px; height: 300px;">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table">
+                            <thead>
+                                <th >{{ object.nombre }}</th>
+                            </thead>
+                            <tbody>
+                                {% crud_fields object 'cliente,marco,material,espesor,precalentado,moldeo,enfriado,observaciones' %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                 <div class="row">
+                {% if object.calefaccion %}
+                        <div class="col-md-4" >
+                            <table class="table">
+                                <thead>
+                                <th style="text-align: center;"> Seteo Calefaccion</th>
+                                </thead>
+                            </table>
+                            <div>
+                                <a href="#">
+                                    <img  src="{{object.calefaccion.url}}"   alt="..." style="display: block; margin: auto;max-width: 250px; height: 250px;">
+                                </a>
+                            </div>
+                        </div>
+                {% endif %}
+                {% if object.empujador %}
+                        <div class="col-md-4"  >
+                            <table class="table">
+                                <thead>
+                                <th style="text-align: center;"> Imagen Empujador</th>
+                                </thead>
+                            </table>
+                            <div >
+                                <a href="#">
+                                    <img src="{{object.empujador.url }}"  alt="..." style="display: block; margin: auto;max-width: 250px; height: 250px;">
+                                </a>
+                            </div>
+                        </div>
+                {% endif %}
+                {% if object.sombra %}
+                        <div class="col-md-4" >
+                            <table class="table" >
+                                <thead>
+                                    <th style="text-align: center;"> Imagen Sombra</th>
+                                </thead>
+                            </table>
+                            <div>
+                                    <img src="{{object.sombra.url }}"  alt="..." style="display: block; margin: auto;max-width: 250px; height: 250px;">
+                            </div>
+                        </div>
+
+                {% endif %}
+                 </div>
+                 {% if object.cortes %}
+                     <div class="row" style="margin: 10px;width: 100%; background-color: #ccc;font-size: 20px; text-align: center;">
+                     Cortes
+                     </div>
+                     {% for corte in object.cortes.all  %}
+                         <div class="row">
+                             <div class="col-md-4">
+                                 <div style="margin: 15px">
+                                     <a href="#">
+                                         {% if corte.imagen_ref %}
+
+                                         <img  src="{{ corte.imagen_ref.url }}"  alt="..."
+                                               style="display: block; margin: auto;max-width: 300px; height: 100px;">
+                                         {% endif %}
+
+                                     </a>
+                                 </div>
+                             </div>
+                             <div class="col-md-8">
+                                 <table class="table">
+                                     <thead>
+                                     <th style="width: 20%;">{{ corte.tipo_corte }}</th>
+                                     </thead>
+                                     <tbody>
+                                     {% crud_fields corte 'detalle ,altura,tiempo' %}
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </div>
+                     {% endfor %}
+                 {% endif %}
+
+
+                 {% if object.rebabados %}
+
+                     <div class="row" style="margin: 10px;width: 100%; background-color: #ccc;font-size: 20px; text-align: center;">
+                     Rebabado
+                     </div>
+                     {% for rebabado in object.rebabados.all  %}
+                         <div class="row">
+                             <div class="col-md-4">
+                                 <div style="margin: 15px">
+                                     <a href="#">
+                                         {% if rebabado.imagen_ref %}
+
+                                         <img  src="{{ rebabado.imagen_ref.url }}"  alt="..."
+                                               style="display: block; margin: auto;max-width: 300px; height: 100px;">
+                                         {% endif %}
+                                     </a>
+                                 </div>
+                             </div>
+                             <div class="col-md-8">
+                                 <table class="table">
+                                     <thead>
+                                     <th style="width: 20%;">{{ rebabado.herramienta }}</th>
+                                     </thead>
+                                     <tbody>
+                                     {% crud_fields rebabado 'detalle' %}
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </div>
+                     {% endfor %}
+                 {% endif %}
+
+                 {% if object.pegamentos %}
+
+                     <div class="row" style="margin: 10px;width: 100%; background-color: #ccc;font-size: 20px; text-align: center;">
+                     Pegamento
+                     </div>
+                     {% for pegamento in object.pegamentos.all  %}
+                         <div class="row">
+                             <div class="col-md-4">
+                                 <div style="margin: 15px">
+                                     <a href="#">
+                                         {% if pegamento.imagen_ref %}
+
+                                         <img  src="{{ pegamento.imagen_ref.url }}"  alt="..."
+                                               style="display: block; margin: auto;max-width: 300px; height: 100px;">
+                                         {% endif %}
+                                     </a>
+                                 </div>
+                             </div>
+                             <div class="col-md-8">
+                                 <table class="table">
+                                     <thead>
+                                     <th style="width: 20%;">{{ pegamento.tipo_pegamento }}</th>
+                                     </thead>
+                                     <tbody>
+                                     {% crud_fields pegamento 'detalle' %}
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </div>
+                     {% endfor %}
+                 {% endif %}
+                     {% if object.embalajes %}
+                     <div class="row" style="margin: 10px;width: 100%; background-color: #ccc;font-size: 20px; text-align: center;">
+                     Embalaje
+                     </div>
+                     {% for embalaje in object.embalajes.all  %}
+                         <div class="row">
+                             <div class="col-md-4">
+                                 <div style="margin: 15px">
+                                     <a href="#">
+                                         {% if embalaje.imagen_ref %}
+                                         <img  src="{{ embalaje.imagen_ref.url }}"  alt="..."
+                                               style="display: block; margin: auto;max-width: 300px; height: 100px;">
+                                         {% endif %}
+                                     </a>
+                                 </div>
+                             </div>
+                             <div class="col-md-8">
+                                 <table class="table">
+                                     <thead>
+                                     <th style="width: 20%;">{{ embalaje.tipo_embalaje }}</th>
+                                     </thead>
+                                     <tbody>
+                                     {% crud_fields embalaje 'detalle ,piezas_bulto' %}
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </div>
+                     {% endfor %}
+                 {% endif %}
+
+                 </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {% if url_update and 'update' in views_available and crud_perms.update %}
+            <div class="box-header">
+                <a href="{{ url_update }}{{getparams}}" class="btn btn-primary" >{% trans "Edit" %}</a>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

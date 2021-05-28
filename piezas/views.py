@@ -65,6 +65,7 @@ class PiezaCRUD(CRUDView):
     paginate_position = 'Bottom'  # Both | Bottom
     paginate_template = 'cruds/pagination/enumeration.html'
     inlines = [CortesAjaxCRUD, RebabadoAjaxCRUD, PegamentoAjaxCRUD, EmbaladoAjaxCRUD]
+    template_name_base = 'piezas'
 
 
 # Create your views here.

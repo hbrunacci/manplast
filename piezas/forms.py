@@ -125,7 +125,7 @@ class PiezaForm(forms.ModelForm):
                 ),
                 Tab(
                     _('Observciones Generales'),
-                    Field('observaciones',wrapper_class='col-md-12'),
+                    Field('observaciones',wrapper_class='col-md-12',attrs={'rows': 2}),
                 )
             )
         )

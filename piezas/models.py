@@ -16,7 +16,6 @@ class Pieza(Base_Model):
     empujador = models.ImageField(verbose_name='Imagen Empujador', null=True, blank=True, upload_to='uploads/')
     sombra = models.ImageField(verbose_name='Imagen Sombra', null=True, blank=True, upload_to='uploads/')
     observaciones = models.CharField(max_length=400, null=False, blank=False)
-
     imagen_pieza = models.ImageField(verbose_name='Imagen Pieza', null=True, blank=True, upload_to='uploads/')
 
     class Meta:
@@ -60,7 +59,7 @@ class Rebabado(Base_Model):
 
     #MEC, Tolueno, Silicona, Cemento de contacto, Ciano, Ultra sonido
 
-    pieza = models.ForeignKey(Pieza, on_delete=models.CASCADE, null=True, blank=True, related_name='rebabado')
+    pieza = models.ForeignKey(Pieza, on_delete=models.CASCADE, null=True, blank=True, related_name='rebabados')
     herramienta = models.CharField('Herramienta', max_length=50, null=False, blank=False, choices=HERRAMIENTA)
     detalle = models.CharField('Modo de armado', max_length=1000, null=True, blank=True)
     imagen_ref = models.ImageField(verbose_name='Imagen Muestra', null=True, blank=True, upload_to='uploads/')
@@ -84,7 +83,7 @@ class Pegamento(Base_Model):
 
     #MEC, Tolueno, Silicona, Cemento de contacto, Ciano, Ultra sonido
 
-    pieza = models.ForeignKey(Pieza, on_delete=models.CASCADE, null=True, blank=True, related_name='pegamento')
+    pieza = models.ForeignKey(Pieza, on_delete=models.CASCADE, null=True, blank=True, related_name='pegamentos')
     tipo_pegamento = models.CharField('Pegado con', max_length=50, null=False, blank=False, choices=TIPOS_PEGAMENTO)
     detalle = models.CharField('Modo de armado', max_length=1000, null=True, blank=True)
     imagen_ref = models.ImageField(verbose_name='Imagen Muestra', null=True, blank=True, upload_to='uploads/')
@@ -112,7 +111,7 @@ class Embalado(Base_Model):
 
     #MEC, Tolueno, Silicona, Cemento de contacto, Ciano, Ultra sonido
 
-    pieza = models.ForeignKey(Pieza, on_delete=models.CASCADE, null=True, blank=True, related_name='embalado')
+    pieza = models.ForeignKey(Pieza, on_delete=models.CASCADE, null=True, blank=True, related_name='embalajes')
     tipo_embalaje = models.CharField('Embalar', max_length=50, null=False, blank=False, choices=MATERIAL_EMBALAJE)
     detalle = models.CharField('Modo de armado', max_length=1000, null=True, blank=True)
     piezas_bulto = models.IntegerField('Piezas por paquete', null=True, blank=True)

@@ -63,7 +63,7 @@ ROOT_URLCONF = 'manplast.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templatess')],
+        'DIRS': [os.path.join(BASE_DIR, 'manplast/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
