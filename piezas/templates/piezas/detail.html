@@ -27,8 +27,8 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div style="margin: 15px">
-                            <a href="#">
-                                <img  src="{{ object.imagen_pieza.url }}"  class="rounded float-left" alt="..." style="max-width: 300px; height: 300px;">
+                            <a href="#" id="{{ object.id }}">
+                                <img id="img_{{ object.id }}" src="{{ object.imagen_pieza.url }}"  class="rounded float-left" alt="..." style="max-width: 300px; height: 300px;">
                             </a>
                         </div>
                     </div>
@@ -95,10 +95,10 @@
                          <div class="row">
                              <div class="col-md-4">
                                  <div style="margin: 15px">
-                                     <a href="#">
+                                     <a id="corte_{{ corte.id }}" href="#">
                                          {% if corte.imagen_ref %}
 
-                                         <img  src="{{ corte.imagen_ref.url }}"  alt="..."
+                                         <img  id="img_corte_{{ corte.id }}" src="{{ corte.imagen_ref.url }}"  alt="..."
                                                style="display: block; margin: auto;max-width: 300px; height: 100px;">
                                          {% endif %}
 
@@ -129,10 +129,10 @@
                          <div class="row">
                              <div class="col-md-4">
                                  <div style="margin: 15px">
-                                     <a href="#">
+                                     <a id="rebabado_{{ rebabado.id }}" href="#">
                                          {% if rebabado.imagen_ref %}
 
-                                         <img  src="{{ rebabado.imagen_ref.url }}"  alt="..."
+                                         <img  id="img_rebabado_{{ rebabado.id }}" src="{{ rebabado.imagen_ref.url }}"  alt="..."
                                                style="display: block; margin: auto;max-width: 300px; height: 100px;">
                                          {% endif %}
                                      </a>
@@ -161,10 +161,10 @@
                          <div class="row">
                              <div class="col-md-4">
                                  <div style="margin: 15px">
-                                     <a href="#">
+                                     <a href="#" id="pegamento_{{ pegamento.id }}">
                                          {% if pegamento.imagen_ref %}
 
-                                         <img  src="{{ pegamento.imagen_ref.url }}"  alt="..."
+                                         <img  id="img_pegamento_{{ pegamento.id }}" src="{{ pegamento.imagen_ref.url }}"  alt="..."
                                                style="display: block; margin: auto;max-width: 300px; height: 100px;">
                                          {% endif %}
                                      </a>
@@ -191,9 +191,9 @@
                          <div class="row">
                              <div class="col-md-4">
                                  <div style="margin: 15px">
-                                     <a href="#">
+                                     <a href="#" id="embalaje_{{ embalaje.id }}">
                                          {% if embalaje.imagen_ref %}
-                                         <img  src="{{ embalaje.imagen_ref.url }}"  alt="..."
+                                         <img  id="img_embalaje_{{ embalaje.id }}"src="{{ embalaje.imagen_ref.url }}"  alt="..."
                                                style="display: block; margin: auto;max-width: 300px; height: 100px;">
                                          {% endif %}
                                      </a>
@@ -218,25 +218,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             {% if url_update and 'update' in views_available and crud_perms.update %}
             <div class="box-header">
                 <a href="{{ url_update }}{{getparams}}" class="btn btn-primary" >{% trans "Edit" %}</a>
@@ -246,4 +227,36 @@
         </div>
     </div>
 </div>
+    <!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Image preview</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="imagepreview" style="display: block; margin: auto;width: 480px; " >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+         $("a").on("click", function(e) {
+             e.preventDefault()
+             console.log($('#'+e.target.id).attr('src'));
+             $('#imagepreview').attr('src', $('#'+e.target.id).attr('src')); // here asign the image to the modal when the user click the enlarge link
+                $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+
+        });
+
+        </script>
+
+
+
 {% endblock %}
