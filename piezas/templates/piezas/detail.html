@@ -53,8 +53,8 @@
                                 </thead>
                             </table>
                             <div>
-                                <a href="#">
-                                    <img  src="{{object.calefaccion.url}}"   alt="..." style="display: block; margin: auto;max-width: 250px; height: 250px;">
+                                <a href="#" >
+                                    <img  id='img_calefaccion' src="{{object.calefaccion.url}}"   alt="..." style="display: block; margin: auto;max-width: 250px; height: 250px;">
                                 </a>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                             </table>
                             <div >
                                 <a href="#">
-                                    <img src="{{object.empujador.url }}"  alt="..." style="display: block; margin: auto;max-width: 250px; height: 250px;">
+                                    <img id='img_empujador' src="{{object.empujador.url }}"  alt="..." style="display: block; margin: auto;max-width: 250px; height: 250px;">
                                 </a>
                             </div>
                         </div>
@@ -81,7 +81,11 @@
                                 </thead>
                             </table>
                             <div>
-                                    <img src="{{object.sombra.url }}"  alt="..." style="display: block; margin: auto;max-width: 250px; height: 250px;">
+                                <a href="#">
+
+                                    <img id='img_sombra' src="{{object.sombra.url }}"  alt="..." style="display: block; margin: auto;max-width: 250px; height: 250px;">
+                                </a>
+
                             </div>
                         </div>
 
@@ -247,7 +251,8 @@
 
 
 <script>
-         $("a").on("click", function(e) {
+         $("img").on("click", function(e) {
+             console.log(e.target)
              e.preventDefault()
              console.log($('#'+e.target.id).attr('src'));
              $('#imagepreview').attr('src', $('#'+e.target.id).attr('src')); // here asign the image to the modal when the user click the enlarge link
