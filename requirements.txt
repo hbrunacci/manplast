@@ -27,7 +27,7 @@ django-stdimage==5.3.0
 django-weasyprint==1.1.0
 django-widget-tweaks==1.4.8
 djangoajax==3.2
-djangorestframework==3.12.4
+djangorestframework==3.15.2
 easy-thumbnails==2.7.1
 html5lib==1.1
 httpie==3.1.0
