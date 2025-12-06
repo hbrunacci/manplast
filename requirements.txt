@@ -30,7 +30,7 @@ djangoajax==3.2
 djangorestframework==3.12.4
 easy-thumbnails==2.7.1
 html5lib==1.1
-httpie==2.4.0
+httpie==3.1.0
 idna==3.1
 phonenumbers==8.12.20
 Pillow==8.1.2
